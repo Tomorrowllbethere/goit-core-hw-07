@@ -17,7 +17,6 @@ class Name(Field):
     def get_name(self) -> str:
         return str(self.value)
 
-
 class Phone(Field):
 # реалізація класу Phone:
     def __init__(self, value):
@@ -31,7 +30,6 @@ class Phone(Field):
             number_just[0] = "+380" # заміна першого підрядка
             self.value = "".join(number_just) #об'єднання рядків
             return str(self.value)
-
 
 class Birthday():
     def __init__(self, value):
@@ -47,13 +45,6 @@ class Birthday():
     def get_date(self) -> str:
         self.val = dt.datetime.strftime(self.value, "%d-%m-%Y")
         return self.val
-
-
-
-
-    
-
-
 
 class Record():
     # реалізація класу
@@ -102,6 +93,7 @@ class Record():
  
     def __str__(self):
         return f"\nIt's automatically printed.\nContact name: {self.name}, phones: {self.phones}\n"
+
 """
 data = {name:phones}
 new.data = {'Name': {Phones: 'Phones', Birthday: 'Birthday'}, 'Other_Name': {Phones: 'Phones', Birthday: 'Birthday'} }
@@ -109,9 +101,6 @@ info = new.data['Name']
 new.data['Name'][Phones] = ['380687811111',]
 new.data['Name'][birthday] = birthday
 """
-
-    
-
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -163,7 +152,8 @@ class AddressBook(UserDict):
             else:
                 print (f"Don't find this name: {name}")
                 return None
-
+            
+# \\\\\\ код привітання з дн на 7 днів вперед з різницею від словника з датами
     def get_upcoming_birthdays(self):
         tdate= dt.datetime.today().date() # беремо сьогоднішню дату
         upcoming_birthdays=[] # створюємо список для результатів
@@ -191,6 +181,7 @@ class AddressBook(UserDict):
         else:
             print
             return (f"This is your contacts schedule for greetings in the next week.\n {upcoming_birthdays}")
+
 # Реалізовано метод delete, який видаляє запис за ім'ям.
     def delete(self, name):
         if name in self.data.keys():
@@ -199,18 +190,10 @@ class AddressBook(UserDict):
         else:
             print(f"Record for '{name}' not found in the address book.")
 
-# \\\\\\ код привітання з дн на 7 днів вперед з різницею від словника з датами
-   
-
-
 def parse_input(user_input): #функція, яка приймає введений рядок. ділить та сортує дані.
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
     return cmd, *args
-
-
-
-
 
 def input_error(func): # декоратор- обробка помилок при введенні
     def inner(args, contacts):
@@ -251,7 +234,6 @@ def input_error(func): # декоратор- обробка помилок пр�
             # return "Phone must be a number"
     return inner
 
-
 @input_error
 def add_contact(args, contacts) -> Record:# функція додає дані в словник
     name, phone = args
@@ -265,7 +247,6 @@ def add_contact(args, contacts) -> Record:# функція додає дані �
 def change_contact(args, contacts):#фукнція змінює номер телефону, якщо імя співпадає
     return args
 
-
 def added_date(args, contacts) -> Record:
     name, date = args
     name = Name(args[0]).get_name()
@@ -273,8 +254,6 @@ def added_date(args, contacts) -> Record:
     rec = Record(name)
     rec.add_birthday(date)
     return  rec         
-
-
 
 def main():#основна функція
     contacts  = AddressBook()
@@ -315,12 +294,9 @@ def main():#основна функція
             elif command == "show-birthday":
                 list_btday = contacts.find_bthday(args[0])
                 print(f" Contact {args[0]} : birthday {list_btday.birthday}")
-
             elif command == "congrats":
-
                 congrats= contacts.get_upcoming_birthdays()
                 print(congrats)
-
             elif command == "delete": # працює коректно, видаляє запис про поданого користувача повністю
                 contacts.delete(args[0])
             elif command == "help": # команда-підказка вводу даних для користувача
@@ -330,8 +306,6 @@ def main():#основна функція
                 print("Invalid command.\nTry one more time")
         except Exception as e:
             print(f"\n{e}\n Plese, try again.")
-
-
 
 if __name__ == "__main__":
     main()
