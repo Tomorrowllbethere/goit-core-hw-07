@@ -249,7 +249,7 @@ def change_contact(args, contacts):#фукнція змінює номер те�
 
 def added_date(args, contacts) -> Record:
     name, date = args
-    name = Name(args[0]).get_name()
+    name = Name(args[0]).get_name() 
     date = Birthday(args[1]).get_birthday()
     rec = Record(name)
     rec.add_birthday(date)
@@ -258,11 +258,15 @@ def added_date(args, contacts) -> Record:
 def main():#основна функція
     contacts  = AddressBook()
     help: list=[
-        ['add (name) (phone)                ->for add a new contacts to me'],
+        ['add (name) (phone)                -> for add a new contacts to me'],
         ['change (name) (phone) (new_phone) -> for change contacts i have'],
         ['all                               -> to see all contacts i save'],
         ['delete (name)                     -> to delete one contact'],
-        ['show (name)                       -> to see number of somebody']
+        ['show (name)                       -> to see number of somebody'],
+        ['congrats                          -> for get some list - shedule to greeting' ],
+        ['add-birthday (name) (birthday)    -> for add a birthday date to me'],
+        ['show-birthday (name)              -> to see birthday date of somebody'],
+        ['close or exit                     -> for exit']
         ]
     print("_____________\nHello. \nI'm glad to see you")
     print("\nI have some list of commands. If you need this - enter help\n")
